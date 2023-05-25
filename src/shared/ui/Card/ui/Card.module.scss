@@ -1,0 +1,21 @@
+.normal {
+    width: 100%;
+    height: 72px;
+    color: #111b21;
+    background: #fff;
+    border-bottom: 1px solid #e9edef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    min-width: 285px;
+    max-width: 375px;
+    color: #111b21;
+    margin: 12px 1em;
+    padding: 6px 7px 8px 9px;
+    box-shadow:  (1px .5px black,.13);
+    border-radius: 7.5px;
+    background: #d9fdd3;
+}
