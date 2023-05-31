@@ -1,20 +1,15 @@
-import { DeepPartial, ReducersMapObject } from "@reduxjs/toolkit";
-import { StateSchema } from "../config/StateSchema"
-import { ReactNode } from 'react'
-import { Provider } from "react-redux";
-import { store } from "../config/store";
-
+import { DeepPartial, ReducersMapObject } from '@reduxjs/toolkit';
+import { StateSchema } from '../config/StateSchema';
+import { ReactNode } from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../config/store';
 
 interface StoreProviderProps {
-    children?: ReactNode;
+	children?: ReactNode;
 }
 
 export const StoreProvider = (props: StoreProviderProps) => {
-    const {
-        children
-    } = props
+	const { children } = props;
 
-
-    return <Provider store={store} >{children}</Provider>
-
-}
+	return <Provider store={store}>{children}</Provider>;
+};

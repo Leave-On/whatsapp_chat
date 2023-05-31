@@ -1,14 +1,12 @@
-import { Contact } from "../../../../app/types";
+import { Contact } from '../../../../app/types';
 
 export interface ChatSchema {
-    idInstance: string;
-    apiTokenInstance: string;
-    isLoading?: boolean;
-    isAuth?: boolean;
-    currentChatPhone?: string;
-    chats: Contact[];
+	idInstance: string;
+	apiTokenInstance: string;
+	isLoading?: boolean;
+	isAuth?: boolean;
+	currentChatPhone?: string;
+	chats: Contact[];
 }
 
-export interface User {
-
-}
+export interface User {}

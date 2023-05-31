@@ -2,20 +2,19 @@ import { StickyLayout } from '../../../../app/styles/layouts/StickyLayout/Sticky
 import { LoginForm } from '../../../../features/AuthByCredentials/ui/ui/LoginForm/LoginForm';
 import { ChatroomInput } from '../ChatroomInput/ChatroomInput';
 import { MessageList } from '../MessageList/MessageList';
-import cls from './Chatroom.module.scss'
+import cls from './Chatroom.module.scss';
 
 interface ChatroomProps {
-  className?: string;
+	className?: string;
 }
 
-export const Chatroom = ({className}: ChatroomProps) => {
-
-    return (
-    <div className={cls.Chatroom}>
-      <StickyLayout
-        main={<MessageList />}
-        bottom={<ChatroomInput />}
-      />
-    </div>
-  );
-}
+export const Chatroom = ({ className }: ChatroomProps) => {
+	return (
+		<div className={cls.Chatroom}>
+			<StickyLayout
+				main={<MessageList />}
+				bottom={<ChatroomInput />}
+			/>
+		</div>
+	);
+};
