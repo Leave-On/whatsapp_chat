@@ -1,0 +1,17 @@
+.LoginForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+label {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}

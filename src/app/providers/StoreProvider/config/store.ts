@@ -1,31 +1,15 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { StateSchema, ThunkExtraArg } from './StateSchema'
-import { $api } from '../../../api/api'
+import { useDispatch } from 'react-redux'
+import { loginReducer } from '../../../../features/AuthByCredentials/model/slice/loginSlice'
 
-export function CreateReduxStore(
-    initialState?: StateSchema,
-    asyncReducers?: ReducersMapObject<StateSchema>
-) {
-    const rootReducers: ReducersMapObject<StateSchema> = {
-        ...asyncReducers
-    }
 
-const extraArg: ThunkExtraArg = {
-    api: $api
-}
-
-const store = configureStore({
-  reducer: rootReducers,
-  preloadedState: initialState,
-  middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware({
-    thunk: {
-        extraArgument: extraArg
-    }
-  })
+export const store =  configureStore<StateSchema>({
+  reducer: {
+    loginForm: loginReducer
+  },
 })
 
-return store
-}
 
-export type AppDispatch = ReturnType<typeof CreateReduxStore>['dispatch']
+export const useAppDispatch = useDispatch<typeof store.dispatch>
+export type RootState = ReturnType<typeof store.getState>

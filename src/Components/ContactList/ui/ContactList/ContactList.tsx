@@ -6,14 +6,15 @@ import cls from './ContactList.module.scss'
 interface ContactListProps {
   className?: string;
   contacts?: Contact[];
+  openModal?: () => void;
 }
 
-export const ContactList = ({className, contacts}: ContactListProps) => {
+export const ContactList = ({className, contacts, openModal}: ContactListProps) => {
 
     return (
     <div className={cls.ContactList}>
       <Card>
-        <button className={cls.button} >Start new chat</button>
+        <button className={cls.button} onClick={openModal} >Start new chat</button>
       </Card>
       {contacts?.map(contact => (
         <ContactCard

@@ -1,4 +1,9 @@
 export interface Contact {
     name: string;
-    phoneNumber: number;
+    phoneNumber: string;
+}
+
+export interface Message {
+    chatId: string;
+    message: string;
 }

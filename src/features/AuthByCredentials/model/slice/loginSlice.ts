@@ -1,42 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { LoginSchema } from '../types/loginSchema'
-import { loginByGreenApiGredentials } from '../services/loginByGreenApiGredentials'
+import { ChatSchema } from '../types/ChatSchema'
+import { sendMessage } from '../services/useGreenApi'
+import { Contact } from '../../../../app/types'
 
 
-const initialState: LoginSchema = {
+const initialState: ChatSchema = {
     isLoading: false,
     apiTokenInstance: '',
-    idInstance: ''
+    idInstance: '',
+    currentChatPhone: undefined,
+    chats: []
 }
 
-export const counterSlice = createSlice({
+export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
     setApiToken: (state, {payload}: PayloadAction<string>) => {
       state.apiTokenInstance = payload
+
     },
     setId: (state, {payload}: PayloadAction<string>) => {
       state.idInstance = payload
     },
+    setCurrentChat: (state, {payload}: PayloadAction<string>) => {
+      state.currentChatPhone = payload
+    },
+    addChat: (state, {payload}: PayloadAction<Contact>) => {
+      state.chats.push(payload)
+    },
+    setIsAuth: (state, {payload}: PayloadAction<boolean>) => {
+      state.isAuth = payload
+    }
   },
   extraReducers: (builder) => {
     builder
-        .addCase(loginByGreenApiGredentials.pending, (state, action) => {
+        .addCase(sendMessage.pending, (state, action) => {
             state.isLoading = true;
         })
-        .addCase(loginByGreenApiGredentials.fulfilled, (state, action) => {
-            state.isLoading = false;
+        .addCase(sendMessage.fulfilled, (state, action) => {
+          state.isLoading = false;
         })
-        .addCase(loginByGreenApiGredentials.rejected, (state, action) => {
-            state.isLoading = false;
+        .addCase(sendMessage.rejected, (state, action) => {
+          state.isLoading = false;
         });
 },
 
 })
 
-// Action creators are generated for each case reducer function
-export const { actions: loginActions } = counterSlice
 
-export default counterSlice.reducer
+export const { actions: loginActions, reducer: loginReducer  } = loginSlice
