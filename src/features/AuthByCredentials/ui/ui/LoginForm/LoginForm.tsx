@@ -41,11 +41,14 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 	);
 
 	const onSaveCredentials = () => {
+		if (!isAuth) {
+			localStorage.setItem('userId', userId)
+			localStorage.setItem('userToken', userToken)
+		}
 		dispatch(loginActions.addChat(contact));
 		dispatch(loginActions.setIsAuth(true));
 		dispatch(loginActions.setCurrentChat(contact.phoneNumber));
-		localStorage.setItem('userId', userId)
-		localStorage.setItem('userToken', userToken)
+
 		onSuccess();
 	};
 
@@ -58,7 +61,7 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 
 	useEffect(() => {
 			dispatch(loginActions.setApiToken(localStorage.getItem('userToken') as string))
-			dispatch(loginActions.setApiToken(localStorage.getItem('userId') as string))
+			dispatch(loginActions.setId(localStorage.getItem('userId') as string))
 	}, [])
 
 	return (
