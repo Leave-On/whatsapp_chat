@@ -4,14 +4,15 @@ import { Message } from '../../model/types';
 
 interface MesageCardProps {
 	className?: string;
-	message?: Message;
+	message?: string;
+	contactName?: string;
 }
 
-export const MessageCard = ({ className, message }: MesageCardProps) => {
+export const MessageCard = ({ className, message, contactName }: MesageCardProps) => {
 	return (
 		<Card variant="message">
-			<div>{message?.name}</div>
-			<div>{message?.text}</div>
+			<div>{contactName}</div>
+			<div>{message}</div>
 		</Card>
 	);
 };

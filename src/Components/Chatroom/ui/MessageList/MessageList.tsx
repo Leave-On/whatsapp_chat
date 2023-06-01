@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { getMessages } from '../../../../features/AuthByCredentials/model/selectors';
 import { Message } from '../../model/types';
 import { MessageCard } from '../MessageCard/MesageCard';
 import cls from './MessageList.module.scss';
@@ -8,20 +10,14 @@ interface MessageListProps {
 }
 
 export const MessageList = ({ className }: MessageListProps) => {
-	const messages = [
-		{
-			id: 1,
-			name: 'Jack',
-			text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis deleniti cumque dignissimos accusamus doloremque iusto velit eligendi magnam tempore, ullam, quos suscipit, facere ex delectus. Sapiente dicta velit obcaecati consectetur.',
-		},
-	];
+	const messages = useSelector(getMessages)
 
 	return (
 		<div className={cls.MessageList}>
 			{messages.map((message) => (
 				<MessageCard
-					message={message}
-					key={message.id}
+					message={message.message}
+					key={message.message}
 				/>
 			))}
 		</div>

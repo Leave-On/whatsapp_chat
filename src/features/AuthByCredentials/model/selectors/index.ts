@@ -6,3 +6,4 @@ export const getUserIsLoading = (state: StateSchema) => state?.loginForm?.isLoad
 export const getChats = (state: StateSchema) => state.loginForm.chats || [];
 export const getCurrentChatPhone = (state: StateSchema) => state.loginForm.currentChatPhone || null;
 export const getIsAuth = (state: StateSchema) => state.loginForm.isAuth || false;
+export const getMessages = (state: StateSchema) => state.loginForm.messages || []

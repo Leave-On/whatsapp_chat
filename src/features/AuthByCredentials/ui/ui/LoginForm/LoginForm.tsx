@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { classes } from '../../../../../app/lib/classes/classes';
 import { useAppDispatch } from '../../../../../app/lib/hooks/typedReduxHooks';
@@ -44,6 +44,8 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 		dispatch(loginActions.addChat(contact));
 		dispatch(loginActions.setIsAuth(true));
 		dispatch(loginActions.setCurrentChat(contact.phoneNumber));
+		localStorage.setItem('userId', userId)
+		localStorage.setItem('userToken', userToken)
 		onSuccess();
 	};
 
@@ -53,6 +55,11 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 	const handleContactPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setContact({ ...contact, phoneNumber: e.target.value });
 	};
+
+	useEffect(() => {
+			dispatch(loginActions.setApiToken(localStorage.getItem('userToken') as string))
+			dispatch(loginActions.setApiToken(localStorage.getItem('userId') as string))
+	}, [])
 
 	return (
 		<div className={classes(cls.LoginForm, {}, [className])}>

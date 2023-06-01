@@ -1,33 +1,30 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
-import { $api } from '../../../../app/api/api';
+import { $greenApi } from '../../../../app/api/greenApi';
+import { StateSchema } from '../../../../app/providers/StoreProvider/config/StateSchema';
 import { Message } from '../../../../app/types';
-import { getUserId, getUserToken } from '../selectors';
+import { getCurrentChatPhone, getUserId, getUserToken } from '../selectors';
+import { loginActions } from '../slice/loginSlice';
 
-export interface sendMessageProps {
-	message: Message;
-}
+export type sendMessageProps = string;
 
-export const sendMessage = createAsyncThunk<Message, sendMessageProps>(
-	'login',
-	async (message, thunkApi) => {
-		const userId = useSelector(getUserId);
-		const userToken = useSelector(getUserToken);
-		console.log('thunk');
+export const sendMessage = createAsyncThunk<void, sendMessageProps>(
+	'login/sendMessage',
+	async (message, {rejectWithValue, getState, dispatch}) => {
+		const state = getState() as StateSchema
+		const userId = state.loginForm.idInstance
+		const userToken = state.loginForm.apiTokenInstance
+		const chatId = state.loginForm.currentChatPhone?.concat('@c.us')
 
-		console.log(userId, userToken, message);
-		try {
-			const response = await $api.post(`${userId}/send/${userToken}`, message);
-			console.log(userId, userToken, message);
-			if (!response.data) {
-				throw new Error('auth failed');
+		console.log(userId, userToken);
+
+		if (userId && userToken && chatId) {
+			const messageToSend = {
+				chatId,
+				message
 			}
-			console.log(response.data);
-			console.log(userId, userToken, message);
-			return response.data;
-		} catch (e) {
-			console.log(userId, userToken, message);
-			console.log(e);
+			await $greenApi.post(`waInstance${userId}/sendMessage/${userToken}`, messageToSend);
+			dispatch(loginActions.addMessage(messageToSend))
 		}
 	},
 );
