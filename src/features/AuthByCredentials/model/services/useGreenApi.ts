@@ -42,19 +42,23 @@ export const receiveMessage = createAsyncThunk(
 		try {
 			const response = await $greenApi.get(`waInstance${userId}/receiveNotification/${userToken}`)
 
-			// if (response.data.body.typeWebhook === 'incomingMessageReceived') {
-			// 	// const message = response.data.body.messageData?.textMessage
-			// 	// const chatId = response.data.body.senderData?.chatId
-			// 	// dispatch(loginActions.addMessage({
-			// 	// 	chatId,
-			// 	// 	message,
-			// 	// 	type: 'incoming'
-			// 	// }))
-			// }
 
+			if (response.data) {
+				if (response.data.body.typeWebhook === 'incomingMessageReceived') {
+					const message = response.data.body.messageData.textMessageData.textMessage
+					const chatId = response.data.body.senderData.chatId
+					dispatch(loginActions.addMessage({
+						chatId,
+						message,
+						type: 'incoming'
+					}))
+				}
+
+				receiptId = response.data.receiptId
+				dispatch(deleteNotification({receiptId, userId, userToken}))
+			}
 			console.log(response.data);
-			receiptId = response.data.receiptId
-			dispatch(deleteNotification({receiptId, userId, userToken}))
+
 
 			return response.data
 		} catch (error) {

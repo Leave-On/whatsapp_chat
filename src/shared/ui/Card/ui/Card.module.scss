@@ -25,6 +25,15 @@
     background: #d9fdd3;
 }
 
+.incoming {
+    align-self: flex-start;
+    background-color: #fff;
+}
+
+.outgoing {
+    align-self: flex-end;
+}
+
 .isActive {
     background:  #f0f2f5;
 }

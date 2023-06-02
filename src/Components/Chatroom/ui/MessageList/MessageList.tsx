@@ -6,7 +6,6 @@ import cls from './MessageList.module.scss';
 
 interface MessageListProps {
 	className?: string;
-	messages?: Message[];
 }
 
 export const MessageList = ({ className }: MessageListProps) => {
@@ -18,7 +17,7 @@ export const MessageList = ({ className }: MessageListProps) => {
 			{messages.filter(message => message.chatId.slice(0, -5) === currentContact)
 				.map((message, i) => (
 				<MessageCard
-					message={message.message}
+					message={message}
 					key={i}
 				/>
 			))}
