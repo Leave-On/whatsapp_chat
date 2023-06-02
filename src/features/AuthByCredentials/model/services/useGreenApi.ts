@@ -1,9 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
 import { $greenApi } from '../../../../app/api/greenApi';
 import { StateSchema } from '../../../../app/providers/StoreProvider/config/StateSchema';
-import { Message } from '../../../../app/types';
-import { getCurrentChatPhone, getUserId, getUserToken } from '../selectors';
 import { loginActions } from '../slice/loginSlice';
 
 export type sendMessageProps = string;
@@ -42,7 +39,6 @@ export const receiveMessage = createAsyncThunk(
 		try {
 			const response = await $greenApi.get(`waInstance${userId}/receiveNotification/${userToken}`)
 
-
 			if (response.data) {
 				if (response.data.body.typeWebhook === 'incomingMessageReceived') {
 					const message = response.data.body.messageData.textMessageData.textMessage
@@ -59,15 +55,12 @@ export const receiveMessage = createAsyncThunk(
 			}
 			console.log(response.data);
 
-
 			return response.data
 		} catch (error) {
 			console.log('error receiving');
 
 			return rejectWithValue(error)
 		}
-
-
 	}
 )
 

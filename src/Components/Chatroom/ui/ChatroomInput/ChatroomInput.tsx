@@ -26,7 +26,7 @@ export const ChatroomInput = ({}: ChatroomInputProps) => {
 	// useEffect(() => {
 	// 	const messageRetriever = setInterval(() => {
 	// 		dispatch(receiveMessage())
-	// 	}, 500)
+	// 	}, 5000)
 
 	// 	return () => {
 	// 		clearInterval(messageRetriever)
