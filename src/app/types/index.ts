@@ -6,4 +6,5 @@ export interface Contact {
 export interface Message {
 	chatId: string;
 	message: string;
+	type: 'incoming' | 'outgoing'
 }

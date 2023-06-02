@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../app/lib/hooks/typedReduxHooks';
-import { sendMessage } from '../../../../features/AuthByCredentials/model/services/useGreenApi';
+import { receiveMessage, sendMessage } from '../../../../features/AuthByCredentials/model/services/useGreenApi';
 import cls from './ChatroomInput.module.scss';
 
 interface ChatroomInputProps {}
@@ -19,6 +19,20 @@ export const ChatroomInput = ({}: ChatroomInputProps) => {
 		}
 	};
 
+	const getMessage = () => {
+		dispatch(receiveMessage())
+	}
+
+	// useEffect(() => {
+	// 	const messageRetriever = setInterval(() => {
+	// 		dispatch(receiveMessage())
+	// 	}, 500)
+
+	// 	return () => {
+	// 		clearInterval(messageRetriever)
+	// 	}
+	// }, [dispatch])
+
 	return (
 		<div className={cls.ChatroomInput}>
 			<input
@@ -28,6 +42,7 @@ export const ChatroomInput = ({}: ChatroomInputProps) => {
 				onChange={(e) => setMessage(e.target.value)}
 				onKeyDown={handleKeyDown}
 			/>
+			<button onClick={getMessage} >Get</button>
 		</div>
 	);
 };

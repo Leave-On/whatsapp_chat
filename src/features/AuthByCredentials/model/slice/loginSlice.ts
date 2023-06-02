@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { ChatSchema } from '../types/ChatSchema';
-import { sendMessage } from '../services/useGreenApi';
+import { receiveMessage, sendMessage } from '../services/useGreenApi';
 import { Contact, Message } from '../../../../app/types';
 import { fetchTest } from '../services/fetch';
 
@@ -48,7 +48,7 @@ export const loginSlice = createSlice({
             .addCase(sendMessage.rejected, (state, action) => {
                 state.isLoading = false;
             })
-            .addCase(fetchTest.fulfilled, (state, action) => {
+            .addCase(receiveMessage.fulfilled, (state, action) => {
                 state.isLoading = false
             });
     },

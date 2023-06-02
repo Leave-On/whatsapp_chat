@@ -24,7 +24,68 @@ export const sendMessage = createAsyncThunk<void, sendMessageProps>(
 				message
 			}
 			await $greenApi.post(`waInstance${userId}/sendMessage/${userToken}`, messageToSend);
-			dispatch(loginActions.addMessage(messageToSend))
+			dispatch(loginActions.addMessage({
+				...messageToSend,
+				type: 'outgoing'
+			}))
 		}
 	},
 );
+
+export const receiveMessage = createAsyncThunk(
+	'login/receiveMessage',
+	async (_, {rejectWithValue, getState, dispatch}) => {
+		const state = getState() as StateSchema
+		const userId = state.loginForm.idInstance
+		const userToken = state.loginForm.apiTokenInstance
+		let receiptId
+		try {
+			const response = await $greenApi.get(`waInstance${userId}/receiveNotification/${userToken}`)
+
+			// if (response.data.body.typeWebhook === 'incomingMessageReceived') {
+			// 	// const message = response.data.body.messageData?.textMessage
+			// 	// const chatId = response.data.body.senderData?.chatId
+			// 	// dispatch(loginActions.addMessage({
+			// 	// 	chatId,
+			// 	// 	message,
+			// 	// 	type: 'incoming'
+			// 	// }))
+			// }
+
+			console.log(response.data);
+			receiptId = response.data.receiptId
+			dispatch(deleteNotification({receiptId, userId, userToken}))
+
+			return response.data
+		} catch (error) {
+			console.log('error receiving');
+
+			return rejectWithValue(error)
+		}
+
+
+	}
+)
+
+interface deleteNotificationProps {
+	receiptId: number;
+	userId: string;
+	userToken: string;
+}
+
+const deleteNotification = createAsyncThunk<void, deleteNotificationProps>(
+	'login/deleteNotification',
+	async ({receiptId, userId, userToken}, {rejectWithValue}) => {
+
+		try {
+			const response = await $greenApi.delete(`waInstance${userId}/deleteNotification/${userToken}/${receiptId}`)
+
+			return response.data
+		} catch (error) {
+			console.log('error deleting');
+
+			return rejectWithValue(error)
+		}
+
+	}
+)

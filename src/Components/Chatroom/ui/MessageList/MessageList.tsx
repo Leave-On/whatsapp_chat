@@ -12,15 +12,14 @@ interface MessageListProps {
 export const MessageList = ({ className }: MessageListProps) => {
 	const messages = useSelector(getMessages)
 	const currentContact = useSelector(getCurrentChatPhone)
-	console.log('79613117753@c.us'.slice(0, -5))
 
 	return (
 		<div className={cls.MessageList}>
 			{messages.filter(message => message.chatId.slice(0, -5) === currentContact)
-				.map((message) => (
+				.map((message, i) => (
 				<MessageCard
 					message={message.message}
-					key={message.message}
+					key={i}
 				/>
 			))}
 		</div>

@@ -44,9 +44,9 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 		if (!isAuth) {
 			localStorage.setItem('userId', userId)
 			localStorage.setItem('userToken', userToken)
+			dispatch(loginActions.setIsAuth(true));
 		}
 		dispatch(loginActions.addChat(contact));
-		dispatch(loginActions.setIsAuth(true));
 		dispatch(loginActions.setCurrentChat(contact.phoneNumber));
 
 		onSuccess();
@@ -60,6 +60,8 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 	};
 
 	useEffect(() => {
+		const isUserAuthed = Boolean(localStorage.getItem('userToken')) && Boolean(localStorage.getItem('userId'))
+			dispatch(loginActions.setIsAuth(isUserAuthed))
 			dispatch(loginActions.setApiToken(localStorage.getItem('userToken') as string))
 			dispatch(loginActions.setId(localStorage.getItem('userId') as string))
 	}, [])
