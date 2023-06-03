@@ -1,16 +1,5 @@
-import { AxiosInstance } from 'axios';
-import { ChatSchema } from '../../../../features/AuthByCredentials/model/types/ChatSchema';
+import { ChatSchema } from '@/features/Chat';
 
 export interface StateSchema {
-	loginForm: ChatSchema;
-}
-
-export interface ThunkExtraArg {
-	api: AxiosInstance;
-}
-
-export interface ThunkConfig<T> {
-	rejectValue: T;
-	extra: ThunkExtraArg;
-	state: StateSchema;
+	chat: ChatSchema;
 }

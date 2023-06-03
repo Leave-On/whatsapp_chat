@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { classes } from '../../../../app/lib/classes/classes';
+import { classes } from '../../../lib/classes/classes';
 import cls from './Card.module.scss';
 
 export type CardVariant = 'normal' | 'message';
