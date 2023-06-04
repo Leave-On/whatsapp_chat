@@ -22,11 +22,17 @@ npm run start:build  - запуск проекта в prod режиме
 ## Инструменты
 
 Работа со стейтом - Redux-toolkit
+
 Сборка - vite
+
 Линтинг - eslint
+
 Форматирование - prettier
+
 Стили - scss-modules
+
 typescript
+
 axios
 
 ----
