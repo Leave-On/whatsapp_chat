@@ -1,5 +1,5 @@
-import { IMessage } from "@/entities/Message";
-import { IContact } from "@/entities/Contact";
+import { IMessage } from '@/entities/Message';
+import { IContact } from '@/entities/Contact';
 
 export interface ChatSchema {
 	idInstance: string;

@@ -8,22 +8,20 @@ interface ContactListProps {
 	openModal?: () => void;
 }
 
-export const ContactList: React.FC<ContactListProps> = ({ className, contacts, openModal }) => {
+export const ContactList: React.FC<ContactListProps> = ({
+	className,
+	contacts,
+	openModal,
+}) => {
 	return (
 		<div className={cls.ContactList}>
 			<Card>
-				<button
-					className={cls.button}
-					onClick={openModal}
-				>
+				<button className={cls.button} onClick={openModal}>
 					Start new chat
 				</button>
 			</Card>
 			{contacts?.map((contact) => (
-				<Contact
-					contact={contact}
-					key={contact.phoneNumber}
-				/>
+				<Contact contact={contact} key={contact.phoneNumber} />
 			))}
 		</div>
 	);

@@ -6,7 +6,7 @@ import { getChats } from '@/features/Chat';
 import { LoginModal } from '@/features/Chat';
 import { MainLayout } from './styles/layouts/MainLayout';
 
-const  App: React.FC = () => {
+const App: React.FC = () => {
 	const contacts = useSelector(getChats);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -21,22 +21,16 @@ const  App: React.FC = () => {
 	return (
 		<div className="app">
 			{isModalOpen && (
-				<LoginModal
-					onClose={onCloseModal}
-					isOpen={isModalOpen}
-				/>
+				<LoginModal onClose={onCloseModal} isOpen={isModalOpen} />
 			)}
 			<MainLayout
 				left={
-					<ContactList
-						contacts={contacts}
-						openModal={onOpenModal}
-					/>
+					<ContactList contacts={contacts} openModal={onOpenModal} />
 				}
 				right={<Chatroom />}
 			/>
 		</div>
 	);
-}
+};
 
 export default App;

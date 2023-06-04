@@ -9,7 +9,7 @@ interface CardProps {
 	variant?: CardVariant;
 	onClick?: () => void;
 	isActive?: boolean;
-	messageType?: 'incoming' | 'outgoing' | ''
+	messageType?: 'incoming' | 'outgoing' | '';
 }
 
 export const Card = ({
@@ -21,7 +21,10 @@ export const Card = ({
 }: CardProps) => {
 	return (
 		<div
-			className={classes(cls.Card, { [cls.isActive]: isActive }, [cls[variant], cls[messageType]])}
+			className={classes(cls.Card, { [cls.isActive]: isActive }, [
+				cls[variant],
+				cls[messageType],
+			])}
 			{...otherProps}
 		>
 			{children}

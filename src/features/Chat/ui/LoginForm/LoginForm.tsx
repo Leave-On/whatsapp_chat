@@ -2,8 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { classes } from '@/shared/lib/classes/classes';
 import { useAppDispatch } from '@/shared/lib/hooks/typedReduxHooks';
-import { IContact } from "@/entities/Contact";
-import { getUserId, getUserIsLoading, getUserToken, getIsAuth  } from '../../model/selectors';
+import { IContact } from '@/entities/Contact';
+import {
+	getUserId,
+	getUserIsLoading,
+	getUserToken,
+	getIsAuth,
+} from '../../model/selectors';
 import { chatActions } from '../../model/slice/chatSlice';
 import cls from './LoginForm.module.scss';
 
@@ -18,7 +23,10 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 
 	const userId = useSelector(getUserId);
 	const userToken = useSelector(getUserToken);
-	const [contact, setContact] = useState<IContact>({ name: '', phoneNumber: '' });
+	const [contact, setContact] = useState<IContact>({
+		name: '',
+		phoneNumber: '',
+	});
 
 	const isLoading = useSelector(getUserIsLoading);
 
@@ -40,8 +48,8 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 
 	const onSaveCredentials = () => {
 		if (!isAuth) {
-			localStorage.setItem('userId', userId)
-			localStorage.setItem('userToken', userToken)
+			localStorage.setItem('userId', userId);
+			localStorage.setItem('userToken', userToken);
 			dispatch(chatActions.setIsAuth(true));
 		}
 		dispatch(chatActions.addChat(contact));
@@ -50,19 +58,29 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 		onSuccess();
 	};
 
-	const handleContactNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleContactNameChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+	) => {
 		setContact({ ...contact, name: e.target.value });
 	};
-	const handleContactPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleContactPhoneChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+	) => {
 		setContact({ ...contact, phoneNumber: e.target.value });
 	};
 
 	useEffect(() => {
-		const isUserAuthed = Boolean(localStorage.getItem('userToken')) && Boolean(localStorage.getItem('userId'))
-			dispatch(chatActions.setIsAuth(isUserAuthed))
-			dispatch(chatActions.setApiToken(localStorage.getItem('userToken') as string))
-			dispatch(chatActions.setId(localStorage.getItem('userId') as string))
-	}, [dispatch])
+		const isUserAuthed =
+			Boolean(localStorage.getItem('userToken')) &&
+			Boolean(localStorage.getItem('userId'));
+		dispatch(chatActions.setIsAuth(isUserAuthed));
+		dispatch(
+			chatActions.setApiToken(
+				localStorage.getItem('userToken') as string,
+			),
+		);
+		dispatch(chatActions.setId(localStorage.getItem('userId') as string));
+	}, [dispatch]);
 
 	return (
 		<div className={classes(cls.LoginForm, {}, [className])}>

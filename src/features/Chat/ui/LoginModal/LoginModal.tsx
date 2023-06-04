@@ -28,14 +28,8 @@ export const LoginModal = ({ className, onClose, isOpen }: ModalProps) => {
 	return (
 		<Portal>
 			<div className={classes(cls.LoginModal, mods, [className])}>
-				<div
-					className={cls.overlay}
-					onClick={close}
-				/>
-				<LoginForm
-					onSuccess={onClose}
-					className={cls.content}
-				/>
+				<div className={cls.overlay} onClick={close} />
+				<LoginForm onSuccess={onClose} className={cls.content} />
 			</div>
 		</Portal>
 	);

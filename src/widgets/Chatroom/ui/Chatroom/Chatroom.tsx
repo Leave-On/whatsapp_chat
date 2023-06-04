@@ -6,10 +6,7 @@ import cls from './Chatroom.module.scss';
 export const Chatroom: React.FC = () => {
 	return (
 		<div className={cls.Chatroom}>
-			<StickyLayout
-				main={<MessageList />}
-				bottom={<ChatroomInput />}
-			/>
+			<StickyLayout main={<MessageList />} bottom={<ChatroomInput />} />
 		</div>
 	);
 };
