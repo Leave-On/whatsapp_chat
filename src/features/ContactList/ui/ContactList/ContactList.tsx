@@ -3,13 +3,11 @@ import { Contact, IContact } from '@/entities/Contact';
 import cls from './ContactList.module.scss';
 
 interface ContactListProps {
-	className?: string;
 	contacts?: IContact[];
 	openModal?: () => void;
 }
 
 export const ContactList: React.FC<ContactListProps> = ({
-	className,
 	contacts,
 	openModal,
 }) => {

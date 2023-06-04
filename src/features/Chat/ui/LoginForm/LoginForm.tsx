@@ -18,7 +18,6 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
-	const [messageValue, setMessageValue] = useState('');
 	const isAuth = useSelector(getIsAuth);
 
 	const userId = useSelector(getUserId);

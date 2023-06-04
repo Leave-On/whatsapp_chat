@@ -6,11 +6,7 @@ import {
 import { Message } from '../Message/Message';
 import cls from './MessageList.module.scss';
 
-interface MessageListProps {
-	className?: string;
-}
-
-export const MessageList: React.FC<MessageListProps> = ({ className }) => {
+export const MessageList: React.FC = () => {
 	const messages = useSelector(getMessages);
 	const currentContact = useSelector(getCurrentChatPhone);
 
