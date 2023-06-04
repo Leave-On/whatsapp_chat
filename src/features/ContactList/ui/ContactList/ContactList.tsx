@@ -7,10 +7,7 @@ interface ContactListProps {
 	openModal?: () => void;
 }
 
-export const ContactList: React.FC<ContactListProps> = ({
-	contacts,
-	openModal,
-}) => {
+export const ContactList: React.FC<ContactListProps> = ({ contacts, openModal }) => {
 	return (
 		<div className={cls.ContactList}>
 			<Card>

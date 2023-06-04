@@ -3,12 +3,7 @@ import { useSelector } from 'react-redux';
 import { classes } from '@/shared/lib/classes/classes';
 import { useAppDispatch } from '@/shared/lib/hooks/typedReduxHooks';
 import { IContact } from '@/entities/Contact';
-import {
-	getUserId,
-	getUserIsLoading,
-	getUserToken,
-	getIsAuth,
-} from '../../model/selectors';
+import { getUserId, getUserIsLoading, getUserToken, getIsAuth } from '../../model/selectors';
 import { chatActions } from '../../model/slice/chatSlice';
 import cls from './LoginForm.module.scss';
 
@@ -57,27 +52,18 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 		onSuccess();
 	};
 
-	const handleContactNameChange = (
-		e: React.ChangeEvent<HTMLInputElement>,
-	) => {
+	const handleContactNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setContact({ ...contact, name: e.target.value });
 	};
-	const handleContactPhoneChange = (
-		e: React.ChangeEvent<HTMLInputElement>,
-	) => {
+	const handleContactPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setContact({ ...contact, phoneNumber: e.target.value });
 	};
 
 	useEffect(() => {
 		const isUserAuthed =
-			Boolean(localStorage.getItem('userToken')) &&
-			Boolean(localStorage.getItem('userId'));
+			Boolean(localStorage.getItem('userToken')) && Boolean(localStorage.getItem('userId'));
 		dispatch(chatActions.setIsAuth(isUserAuthed));
-		dispatch(
-			chatActions.setApiToken(
-				localStorage.getItem('userToken') as string,
-			),
-		);
+		dispatch(chatActions.setApiToken(localStorage.getItem('userToken') as string));
 		dispatch(chatActions.setId(localStorage.getItem('userId') as string));
 	}, [dispatch]);
 
@@ -88,29 +74,17 @@ export const LoginForm = ({ onSuccess, className }: LoginFormProps) => {
 				<>
 					<div className={cls.input}>
 						<label>Id</label>
-						<input
-							type="text"
-							onChange={onChangeUserId}
-							value={userId}
-						/>
+						<input type="text" onChange={onChangeUserId} value={userId} />
 					</div>
 					<div className={cls.input}>
 						<label>Token</label>
-						<input
-							type="password"
-							onChange={onChangeUserToken}
-							value={userToken}
-						/>
+						<input type="password" onChange={onChangeUserToken} value={userToken} />
 					</div>
 				</>
 			)}
 			<div className={cls.input}>
 				<label>Contact name</label>
-				<input
-					type="text"
-					onChange={handleContactNameChange}
-					value={contact.name}
-				/>
+				<input type="text" onChange={handleContactNameChange} value={contact.name} />
 			</div>
 			<div className={cls.input}>
 				<label>Contact phone</label>

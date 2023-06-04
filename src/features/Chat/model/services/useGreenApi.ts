@@ -26,10 +26,7 @@ export const sendMessage = createAsyncThunk<void, sendMessageProps>(
 					chatId,
 					message,
 				};
-				await $greenApi.post(
-					`waInstance${userId}/sendMessage/${userToken}`,
-					messageToSend,
-				);
+				await $greenApi.post(`waInstance${userId}/sendMessage/${userToken}`, messageToSend);
 				dispatch(
 					chatActions.addMessage({
 						...messageToSend,
@@ -74,24 +71,18 @@ export const receiveMessage = createAsyncThunk(
 				`waInstance${userId}/receiveNotification/${userToken}`,
 			);
 			if (response.data) {
-				if (
-					response.data.body.typeWebhook !== 'incomingMessageReceived'
-				) {
+				if (response.data.body.typeWebhook !== 'incomingMessageReceived') {
 					console.log('waiting for incoming messages');
 
 					receiptId = response.data.receiptId;
-					dispatch(
-						deleteNotification({ receiptId, userId, userToken }),
-					);
+					dispatch(deleteNotification({ receiptId, userId, userToken }));
+					receiveMessage()
+					return
 				}
 
-				if (
-					response.data.body.typeWebhook === 'incomingMessageReceived'
-				) {
+				if (response.data.body.typeWebhook === 'incomingMessageReceived') {
 					console.log('incoming webhook', response.data);
-					const message =
-						response.data.body.messageData.textMessageData
-							.textMessage;
+					const message = response.data.body.messageData.textMessageData.textMessage;
 					const chatId = response.data.body.senderData.chatId;
 					dispatch(
 						chatActions.addMessage({
@@ -102,9 +93,7 @@ export const receiveMessage = createAsyncThunk(
 					);
 
 					receiptId = response.data.receiptId;
-					dispatch(
-						deleteNotification({ receiptId, userId, userToken }),
-					);
+					dispatch(deleteNotification({ receiptId, userId, userToken }));
 					return response.data;
 				}
 			}

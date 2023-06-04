@@ -20,13 +20,9 @@ const App: React.FC = () => {
 
 	return (
 		<div className="app">
-			{isModalOpen && (
-				<LoginModal onClose={onCloseModal} isOpen={isModalOpen} />
-			)}
+			{isModalOpen && <LoginModal onClose={onCloseModal} isOpen={isModalOpen} />}
 			<MainLayout
-				left={
-					<ContactList contacts={contacts} openModal={onOpenModal} />
-				}
+				left={<ContactList contacts={contacts} openModal={onOpenModal} />}
 				right={<Chatroom />}
 			/>
 		</div>

@@ -24,13 +24,7 @@ export const Contact: React.FC<ContactProps> = ({ contact, className }) => {
 
 	return (
 		<Card onClick={handleOnCardClick} isActive={isContactActive}>
-			<div
-				className={classes(
-					cls.contact,
-					{ [cls.isActive]: isContactActive },
-					[className],
-				)}
-			>
+			<div className={classes(cls.contact, { [cls.isActive]: isContactActive }, [className])}>
 				<div className={cls.avatar}>
 					<img src="/user-avatar-50.png" alt="" />
 				</div>

@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../shared/lib/hooks/typedReduxHooks';
 import { getCurrentChatPhone } from '../Chat/model/selectors';
-import {
-	receiveMessage,
-	sendMessage,
-} from '../Chat/model/services/useGreenApi';
+import { receiveMessage, sendMessage } from '../Chat/model/services/useGreenApi';
 import cls from './ChatroomInput.module.scss';
 
 export const ChatroomInput: React.FC = () => {
@@ -20,18 +17,11 @@ export const ChatroomInput: React.FC = () => {
 		}
 	};
 
-
-	useEffect(() => {
-		if (currentContact) {
-			const intId = setInterval(() => {
-				dispatch(receiveMessage());
-			}, 10000)
-
-			return () => {
-				clearInterval(intId)
-			}
-		}
-	}, [currentContact, dispatch])
+	if (currentContact) {
+		setInterval(() => {
+			dispatch(receiveMessage());
+		}, 7000);
+	}
 
 	return (
 		<div className={cls.ChatroomInput}>
